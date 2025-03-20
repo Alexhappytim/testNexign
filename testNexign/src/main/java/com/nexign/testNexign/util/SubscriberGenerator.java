@@ -2,6 +2,8 @@ package com.nexign.testNexign.util;
 
 import com.nexign.testNexign.model.Subscriber;
 import com.nexign.testNexign.repository.SubscriberRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -9,9 +11,11 @@ import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Service
+@RequiredArgsConstructor
 public class SubscriberGenerator {
     private static final int PHONE_NUMBER_LENGTH = 10;
-    private SubscriberRepository subscriberRepository;
+    private final SubscriberRepository subscriberRepository;
+
     public void generate(Long amountToGenerate){
         Set<String> generatedNumbers = new HashSet<>();
         for(long i=0;i<amountToGenerate;i++){

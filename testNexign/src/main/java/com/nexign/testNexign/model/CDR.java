@@ -66,4 +66,13 @@ public class CDR {
     public Long getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return callType.getCode() +
+                ", " + initiatorNumber +
+                ", " + receiverNumber +
+                ", " + startDate +
+                ", " + endDate;
+    }
 }
