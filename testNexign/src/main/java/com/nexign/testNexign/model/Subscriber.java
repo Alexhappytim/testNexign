@@ -1,9 +1,11 @@
 package com.nexign.testNexign.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.util.Objects;
 
+@Getter
 @Entity
 @Table(name = "subscribers")
 public class Subscriber {
@@ -14,14 +16,6 @@ public class Subscriber {
     private String number;
 
     public Subscriber(){}
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getNumber() {
-        return number;
-    }
 
     public void setNumber(String number) {
         this.number = number;

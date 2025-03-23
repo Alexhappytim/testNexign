@@ -3,7 +3,6 @@ package com.nexign.testNexign.util;
 import com.nexign.testNexign.model.Subscriber;
 import com.nexign.testNexign.repository.SubscriberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;

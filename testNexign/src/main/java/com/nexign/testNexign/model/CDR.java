@@ -14,10 +14,12 @@ public class CDR {
     @Enumerated(EnumType.STRING)
     @Column(name = "call_type")
     private CallType callType;
-    @Column(name = "initiator_number")
-    private String initiatorNumber;
-    @Column(name = "receiver_number")
-    private String receiverNumber;
+    @ManyToOne
+    @JoinColumn(name = "initiator", referencedColumnName = "id")
+    private Subscriber initiator;
+    @ManyToOne
+    @JoinColumn(name = "receiver", referencedColumnName = "id")
+    private Subscriber receiver;
     @Column(name = "start_date")
     private Instant startDate;
     @Column(name = "end_date")
@@ -31,20 +33,20 @@ public class CDR {
         this.callType = callType;
     }
 
-    public String getInitiatorNumber() {
-        return initiatorNumber;
+    public Subscriber getInitiator() {
+        return initiator;
     }
 
-    public void setInitiatorNumber(String initiatorNumber) {
-        this.initiatorNumber = initiatorNumber;
+    public void setInitiator(Subscriber initiator) {
+        this.initiator = initiator;
     }
 
-    public String getReceiverNumber() {
-        return receiverNumber;
+    public Subscriber getReceiver() {
+        return receiver;
     }
 
-    public void setReceiverNumber(String receiverNumber) {
-        this.receiverNumber = receiverNumber;
+    public void setReceiver(Subscriber receiver) {
+        this.receiver = receiver;
     }
 
     public Instant getStartDate() {
@@ -70,8 +72,8 @@ public class CDR {
     @Override
     public String toString() {
         return callType.getCode() +
-                ", " + initiatorNumber +
-                ", " + receiverNumber +
+                ", " + initiator.getNumber() +
+                ", " + receiver.getNumber() +
                 ", " + startDate +
                 ", " + endDate;
     }

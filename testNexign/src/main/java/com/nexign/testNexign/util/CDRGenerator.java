@@ -6,13 +6,11 @@ import com.nexign.testNexign.model.Subscriber;
 import com.nexign.testNexign.repository.CDRRepository;
 import com.nexign.testNexign.repository.SubscriberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.Year;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 @Service
@@ -34,9 +32,8 @@ public class CDRGenerator {
             do {
                 secondSub = subscribers.get(ThreadLocalRandom.current().nextInt(subscribers.size()));
             } while (secondSub.equals(firstSub));
-            cdr.setInitiatorNumber(firstSub.getNumber());
-            cdr.setReceiverNumber(secondSub.getNumber());
-            System.out.println(i);
+            cdr.setInitiator(firstSub);
+            cdr.setReceiver(secondSub);
 
 
             Year currentYear = Year.now();
@@ -50,35 +47,14 @@ public class CDRGenerator {
 
             long startEpoch = start.getEpochSecond();
             long endEpoch = end.getEpochSecond() - 1;
-            long firstDate;
-            long secondDate;
-            do {
-                firstDate = ThreadLocalRandom.current().nextLong(startEpoch, endEpoch + 1);
-                secondDate = ThreadLocalRandom.current().nextLong(firstDate, endEpoch + 1);
+            long firstDate = ThreadLocalRandom.current().nextLong(startEpoch, endEpoch);
+            long secondDate = ThreadLocalRandom.current().nextLong(firstDate, endEpoch + 1);
 
-            }while (checkIntersection(firstSub,secondSub,firstDate,secondDate,generatedCDRs));
+
             cdr.setStartDate(Instant.ofEpochSecond(firstDate));
             cdr.setEndDate(Instant.ofEpochSecond(secondDate));
             generatedCDRs.add(cdr);
             cdrRepository.save(cdr);
         }
-    }
-
-    private boolean checkIntersection(Subscriber firstSub, Subscriber secondSub, long firstDate, long secondDate, List<CDR> list) {
-        return false;
-//        for (CDR i : list) {
-//            if (firstSub.getNumber().equals(i.getInitiatorNumber())
-//                    || firstSub.getNumber().equals(i.getReceiverNumber())
-//                    || secondSub.getNumber().equals(i.getInitiatorNumber())
-//                    || secondSub.getNumber().equals(i.getReceiverNumber())) {
-//                if ( (firstDate <= i.getEndDate().getEpochSecond()
-//                        && firstDate >= i.getStartDate().getEpochSecond())
-//                ||(secondDate <= i.getEndDate().getEpochSecond()
-//                        && secondDate >= i.getStartDate().getEpochSecond()) ){
-//                    return true;
-//                }
-//            }
-//        }
-//        return false;
     }
 }
