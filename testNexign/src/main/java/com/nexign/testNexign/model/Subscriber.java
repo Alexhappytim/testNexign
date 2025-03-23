@@ -5,7 +5,9 @@ import lombok.Getter;
 
 import java.util.Objects;
 
-@Getter
+/**
+ * Entity класс абонентов для базы данных
+ */
 @Entity
 @Table(name = "subscribers")
 public class Subscriber {
@@ -27,5 +29,9 @@ public class Subscriber {
         if (o == null || getClass() != o.getClass()) return false;
         Subscriber that = (Subscriber) o;
         return Objects.equals(id, that.id);
+    }
+
+    public String getNumber() {
+        return number;
     }
 }

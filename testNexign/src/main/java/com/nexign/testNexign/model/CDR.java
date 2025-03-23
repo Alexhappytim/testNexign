@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 
 import java.time.Instant;
 
+/**
+ * Entity класс CDR для базы данных
+ */
 @Entity
 @Table(name = "call_records")
 public class CDR {
@@ -69,6 +72,9 @@ public class CDR {
         return id;
     }
 
+    /**
+     * Возвращает в виде строки для CDR отчетов
+     */
     @Override
     public String toString() {
         return callType.getCode() +

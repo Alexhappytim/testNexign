@@ -9,8 +9,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
+
+/**
+ * Класс для сохранения отчетов в csv файлы
+ */
 @Service
 public class FileManager {
+    /**
+     * Константа название директории для сохранения
+     */
     public static final String REPORTS_DIR = "reports";
     public void saveCDRToCSV(UUID uuid, String number, List<CDR> list){
         File reportDir = new File(REPORTS_DIR);

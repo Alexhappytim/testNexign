@@ -2,19 +2,29 @@ package com.nexign.testNexign.util;
 
 import com.nexign.testNexign.model.Subscriber;
 import com.nexign.testNexign.repository.SubscriberRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Класс генератор абонентов
+ */
 @Service
-@RequiredArgsConstructor
+
 public class SubscriberGenerator {
     private static final int PHONE_NUMBER_LENGTH = 10;
     private final SubscriberRepository subscriberRepository;
 
+    public SubscriberGenerator(SubscriberRepository subscriberRepository) {
+        this.subscriberRepository = subscriberRepository;
+    }
+
+    /**
+     * Генерирует n абонентов и записывает их в БД
+     * @param amountToGenerate Количество абонентов
+     */
     public void generate(Long amountToGenerate){
         Set<String> generatedNumbers = new HashSet<>();
         for(long i=0;i<amountToGenerate;i++){

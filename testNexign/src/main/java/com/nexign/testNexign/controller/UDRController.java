@@ -2,21 +2,25 @@ package com.nexign.testNexign.controller;
 
 import com.nexign.testNexign.model.UDR;
 import com.nexign.testNexign.service.UDRService;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+/**
+ * Контроллер для эндпоинта 3 задачи
+ */
 @RestController
 @RequestMapping("/api/udr")
-@AllArgsConstructor
 public class UDRController {
 
     private UDRService udrService;
+
+    public UDRController(UDRService udrService) {
+        this.udrService = udrService;
+    }
+
     @GetMapping("/{phoneNumber}")
     public UDR getUDRForOneUser(@PathVariable("phoneNumber") String number, @RequestParam(required = false) Integer month){
         if (month != null && (month < 1 || month > 12)) {

@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.nexign.testNexign"},{"l":"com.nexign.testNexign.controller"},{"l":"com.nexign.testNexign.model"},{"l":"com.nexign.testNexign.repository"},{"l":"com.nexign.testNexign.service"},{"l":"com.nexign.testNexign.util"}];updateSearchResults();

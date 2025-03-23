@@ -5,7 +5,6 @@ import com.nexign.testNexign.model.CallType;
 import com.nexign.testNexign.model.Subscriber;
 import com.nexign.testNexign.repository.CDRRepository;
 import com.nexign.testNexign.repository.SubscriberRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -13,14 +12,26 @@ import java.time.Year;
 import java.time.ZoneId;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+
+/**
+ * Класс генератор CDR
+ */
 @Service
-@RequiredArgsConstructor
 public class CDRGenerator {
 
     private final CDRRepository cdrRepository;
 
     private final SubscriberRepository subscriberRepository;
 
+    public CDRGenerator(CDRRepository cdrRepository, SubscriberRepository subscriberRepository) {
+        this.cdrRepository = cdrRepository;
+        this.subscriberRepository = subscriberRepository;
+    }
+
+    /**
+     * Генерирует n CDR записей и сохраняет их в БД
+     * @param amountOfCDR Количество записей
+     */
     public void generate(Long amountOfCDR) {
         List<CDR> generatedCDRs = cdrRepository.findAll();
         List<Subscriber> subscribers = subscriberRepository.findAll();
